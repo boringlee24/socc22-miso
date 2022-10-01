@@ -1,0 +1,56 @@
+
+    mig -- Multi Instance GPU management.
+
+    Usage: nvidia-smi mig [options]
+
+    Options include:
+    [-h | --help]: Display help information.
+    [-i | --id]: Enumeration index, PCI bus ID or UUID.
+                 Provide comma separated values for more than one device.
+    [-gi | --gpu-instance-id]: GPU instance ID.
+                               Provide comma separated values for more than one GPU instance.
+    [-ci | --compute-instance-id]: Compute instance ID.
+                                   Provide comma separated values for more than one compute 
+                                   instance.
+    [-lgip | --list-gpu-instance-profiles]: List supported GPU instance profiles.
+                                            Option -i can be used to restrict the command to
+                                            run on a specific GPU.
+    [-lgipp | --list-gpu-instance-possible-placements]: List possible GPU instance placements
+                                                        in the following format, {Start}:Size.
+                                                        Option -i can be used to restrict the
+                                                        command to run on a specific GPU.
+    [-C | --default-compute-instance]: Create compute instance with the default profile when used
+                                       with the option to create a GPU instance (-cgi).
+    [-cgi | --create-gpu-instance]: Create GPU instances for the given profile tuples. A profile
+                                    tuple consists of a profile name or ID and an optional placement
+                                    specifier, which consists of a colon and a placement start index.
+                                    Provide comma separated values for more than one profile tuple.
+                                    Option -i can be used to restrict the command to run on
+                                    a specific GPU.
+    [-dgi | --destroy-gpu-instance]: Destroy GPU instances.
+                                     Options -i and -gi can be used individually or combined
+                                     to restrict the command to run on a specific GPU or GPU
+                                     instance.
+    [-lgi | --list-gpu-instances]: List GPU instances.
+                                   Option -i can be used to restrict the command to run on a
+                                   specific GPU.
+    [-lcip | --list-compute-instance-profiles]: List supported compute instance profiles.
+                                                Options -i and -gi can be used individually or
+                                                combined to restrict the command to run on a
+                                                specific GPU or GPU instance.
+    [-cci | --create-compute-instance]: Create compute instance for the given profile name or IDs.
+                                        Provide comma separated values for more than one profile.
+                                        If no profile name or ID is given, then the default*
+                                        compute instance profile ID will be used. Options -i and
+                                        -gi can be used individually or combined to restrict the
+                                        command to run on a specific GPU or GPU instance.
+    [-dci | --destroy-compute-instance]: Destroy compute instances.
+                                         Options -i, -gi and -ci can be used individually or
+                                         combined to restrict the command to run on a specific
+                                         GPU or GPU instance or compute instance.
+    [-lci | --list-compute-instances]: List compute instances.
+                                       Options -i and -gi can be used individually or combined
+                                       to restrict the command to run on a specific GPU or GPU
+                                       instance.
+
+

@@ -1,0 +1,8 @@
+**.h5
+training_dir
+mapped_count
+raw.githubusercontent.com
+__pycache__
+*.pyc
+mps/scheduler/simulator/logs/
+mig_device_autogen.json
