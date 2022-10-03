@@ -6,3 +6,4 @@ __pycache__
 *.pyc
 mps/scheduler/simulator/logs/
 mig_device_autogen.json
+logs

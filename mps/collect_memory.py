@@ -6,14 +6,14 @@ import time
 import os
 import grpc
 home = os.environ.get('HOME')
-os.chdir(f'{home}/GIT/mig_exp/mps/models')
-sys.path.append(f'{home}/GIT/mig_exp/mps/grpc')
+os.chdir(f'{home}/GIT/socc22-miso/mps/models')
+sys.path.append(f'{home}/GIT/socc22-miso/mps/grpc')
 import grpc_pb2, grpc_pb2_grpc
 from concurrent import futures
 
 port = 50053
 
-with open(f'{home}/GIT/mig_exp/mps/configs/batch.json') as f:
+with open(f'{home}/GIT/socc22-miso/mps/configs/batch.json') as f:
     batch_dict = json.load(f)
 
 class Scheduler(grpc_pb2_grpc.SchedulerServicer):
@@ -71,5 +71,5 @@ for model, val in batch_dict.items():
         proc.wait() # wait for it to finish
         print('process finished')
 
-with open(f'{home}/GIT/mig_exp/mps/configs/memory.json', 'w') as f:
+with open(f'{home}/GIT/socc22-miso/mps/configs/memory.json', 'w') as f:
     json.dump(memory_dict, f, indent=4)

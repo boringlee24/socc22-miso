@@ -10,8 +10,8 @@ import grpc
 import numpy as np
 home = os.environ.get('HOME')
 user = os.environ.get('USER')
-os.chdir(f'{home}/GIT/mig_exp/mps/models')
-sys.path.append(f'{home}/GIT/mig_exp/mps/grpc')
+os.chdir(f'{home}/GIT/socc22-miso/mps/models')
+sys.path.append(f'{home}/GIT/socc22-miso/mps/grpc')
 import grpc_pb2, grpc_pb2_grpc
 from concurrent import futures
 import pandas as pd
@@ -33,9 +33,9 @@ os.environ['CUDA_MPS_LOG_DIRECTORY'] = f'/scratch/{user}/mps_log/nvidia-log{args
 num_active = args.num_active
 
 fractions = [100, 50, 14]
-with open(f'{home}/GIT/mig_exp/mps/configs/batch.json') as f:
+with open(f'{home}/GIT/socc22-miso/mps/configs/batch.json') as f:
     batch_dict = json.load(f)
-with open(f'{home}/GIT/mig_exp/mps/configs/memory.json') as f:
+with open(f'{home}/GIT/socc22-miso/mps/configs/memory.json') as f:
     mem_dict = json.load(f)
 
 repeat = args.repeat 

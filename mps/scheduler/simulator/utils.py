@@ -14,7 +14,7 @@ import time
 def get_speedup(job_models, error_mean, error_std):
     perf_actual = {} # {1: ['7g':1,'4g':0.9,'3g':0.8]}. normalized to max, from 7g, 4g to 1g. If none, put 0.
     perf_pred = {}
-    mig_path = f'/home/{user}/GIT/mig_exp/mps/models/logs/mig'
+    mig_path = f'/home/{user}/GIT/socc22-miso/mps/models/logs/mig'
     mig_slices = ['7g.40gb', '4g.20gb', '3g.20gb', '2g.10gb', '1g.5gb']
     for i, model in job_models.items():
         job = int(i)
@@ -73,7 +73,7 @@ class GPU_status:
     num_to_str = {7: '7g.40gb', 4: '4g.20gb', 3: '3g.20gb', 2: '2g.10gb', 1: '1g.5gb'}
     n2s_reverse = {1: '1g.5gb', 2: '2g.10gb', 3: '3g.20gb', 4: '4g.20gb', 7: '7g.40gb'}
 
-    with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/partition_code.json') as f:
+    with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/partition_code.json') as f:
         partition_code = json.load(f)
 
     def __init__(self, node_index):
@@ -602,10 +602,10 @@ output: actual partition of every GPU, represented as list of GPU_status, modifi
 '''
 def implement_mapped_config(config_dict, gpu_list):
     num_gpu = len(gpu_list)
-    with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/mapped_{num_gpu}gpu.json') as f:
+    with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/mapped_{num_gpu}gpu.json') as f:
         mapping = json.load(f)
     actual_config = ast.literal_eval(mapping[str(config_dict)]) # [0,1,1,2,12]
-    with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/partition_code.json') as f:
+    with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/partition_code.json') as f:
         partition_code = json.load(f)
     for index, config in enumerate(actual_config):
         slice_list = partition_code[str(config)]

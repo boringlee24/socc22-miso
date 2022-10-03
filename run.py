@@ -35,23 +35,30 @@ Path('logs/miso').mkdir(parents=True, exist_ok=True)
 Path('logs/full').mkdir(parents=True, exist_ok=True)
 Path('logs/static').mkdir(parents=True, exist_ok=True)
 Path('logs/oracle').mkdir(parents=True, exist_ok=True)
+Path('logs/mps').mkdir(parents=True, exist_ok=True)
 
 physical_nodes = ['d3104', 'd3105']#['d3103', 'd3100', 'd3101', 'd3106']
 
+print('MISO')
 miso_exp = MISO(args, physical_nodes)
 miso_exp.run(args)
-# full_exp = Experiment(args, physical_nodes)
-# full_exp.run(args)
+time.sleep(300)
 
-# time.sleep(300) # rest 5 min
+print('Full')
+full_exp = Experiment(args, physical_nodes)
+full_exp.run(args)
+time.sleep(300) # rest 5 min
 
-# static_exp = Static(args, physical_nodes)
-# static_exp.run(args)
-# time.sleep(300) # rest 5 min
+print('Static')
+static_exp = Static(args, physical_nodes)
+static_exp.run(args)
+time.sleep(300) # rest 5 min
 
-# oracle_exp = Oracle(args, physical_nodes)
-# oracle_exp.run(args)
-# time.sleep(300) # rest 5 min
+print('Oracle')
+oracle_exp = Oracle(args, physical_nodes)
+oracle_exp.run(args)
+time.sleep(300) # rest 5 min
 
-# mps_exp = MPS(args, physical_nodes)
-# mps_exp.run(args)
+print('MPS')
+mps_exp = MPS(args, physical_nodes)
+mps_exp.run(args)

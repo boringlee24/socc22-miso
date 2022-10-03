@@ -6,7 +6,7 @@ import re
 import json
 import os
 user = os.environ.get('USER')
-sys.path.append(f'/home/{user}/GIT/mig_exp/mps/scheduler/simulator/')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator/')
 from utils import *
 import argparse
 import psutil
@@ -37,13 +37,13 @@ sock.bind(server_address)
 sock.listen(5)
 
 
-with open(f'/home/{user}/GIT/mig_exp/mig_device_autogen.json') as f:
+with open(f'/home/{user}/GIT/socc22-miso/mig_device_autogen.json') as f:
     cuda_devices = json.load(f)[args.node]
-with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/simulator/job_models.json') as f:
+with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator/job_models.json') as f:
     job_models = json.load(f)
-with open(f'/home/{user}/GIT/mig_exp/workloads/num_iters.json') as f:
+with open(f'/home/{user}/GIT/socc22-miso/workloads/num_iters.json') as f:
     num_iters = json.load(f)
-with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/partition_code.json') as f:
+with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/partition_code.json') as f:
     partition_code = json.load(f)
 
 run_pid_dict = {}

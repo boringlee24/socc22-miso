@@ -10,16 +10,17 @@ import argparse
 import math
 from pathlib import Path
 import sys
-sys.path.append(f'/home/{user}/GIT/mig_exp/mps/scheduler/simulator/')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator/')
 from utils import *
 import copy
-sys.path.append(f'/home/{user}/GIT/mig_exp/workloads/')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/workloads/')
 from send_signal import send_signal
 import socket
 import threading
 import _thread
 import signal
 from tcp_interpreter import *
+from threading import Event
 
 # start job
 def start_job(node, job, gpu, sliceid):
@@ -88,7 +89,7 @@ def save_jobs(node, job_list, runtime, run_log):
                 fkill_job(node, job, runtime.pid_dict[job])
             return True
 
-def thread_func(runtime, run_log, mode='full'): # this is an instance of the Experiment class 
+def thread_func(event, runtime, run_log, mode='full'): # this is an instance of the Experiment class 
     # here listen on the socket 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = (socket.gethostname(), 10002)
@@ -96,17 +97,19 @@ def thread_func(runtime, run_log, mode='full'): # this is an instance of the Exp
     sock.bind(server_address)
     sock.listen(5) 
 
-    while True:
+    while not event.is_set():
         # Wait for a connection
         connection, client_address = sock.accept()      
         try:
-            while True:
+            while not event.is_set():
                 data = connection.recv(32)
                 if data: 
                     data_str = data.decode('utf-8')
-                    if 'term_thread' in data_str:
+                    if 'term_thread' in data_str:                        
                         connection.sendall(b'success')
-                        connection.close()
+                        print('breaking connection loop')
+                        sys.exit()
+                        # connection.close()
                     elif mode == 'full':
                         interpret_full(data_str, runtime, run_log)
                     elif mode == 'mps':
@@ -160,4 +163,5 @@ def thread_func(runtime, run_log, mode='full'): # this is an instance of the Exp
                     break
         finally:
             connection.close()
-
+            # print('Terminated connection')
+    print('Terminated thread')

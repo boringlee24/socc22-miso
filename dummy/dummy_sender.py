@@ -11,7 +11,7 @@ import socket
 import argparse
 import signal
 import sys
-sys.path.append(f'/home/{user}/GIT/mig_exp/workloads/')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/workloads/')
 from send_signal import send_signal
 
 

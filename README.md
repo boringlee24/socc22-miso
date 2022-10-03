@@ -25,6 +25,8 @@ conda env create -f environment.yml
 
 then activate the environment in every node.
 
+Make sure there this repo directory is ``/home/${USER}/GIT/socc22-miso`` where `${USER}` is the username. Also get a scratch directory available for temporary storage. Currently the scratch directory is `/scratch/${USER}`. If need to use another scratch directory, replace all `/scratch/${USER}` instances in this repo.
+
 #### GPU Node Setup
 First download the necessary files (e.g., datasets) needed for the workloads. Go to this Google drive link and [download](https://drive.google.com/file/d/1pcPcPNdDRSYTMnwuibjBSeobm1tGFmxE/view?usp=sharing) the file and unzip:
 `unzip MISO_Workload.zip`

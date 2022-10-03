@@ -10,15 +10,16 @@ import argparse
 import math
 from pathlib import Path
 import sys
-sys.path.append(f'/home/{user}/GIT/mig_exp/mps/scheduler/simulator/')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator/')
 from utils import *
 import copy
 from controller_helper import *
 import threading
 import _thread
-sys.path.append(f'/home/{user}/GIT/mig_exp/workloads')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/workloads')
 from send_signal import send_signal
 import socket
+from threading import Event
 
 class Experiment:
     def __init__(self, args, physical_nodes):
@@ -27,7 +28,7 @@ class Experiment:
         # shared attributes across different scheduling policies
         random.seed(args.seed)
         np.random.seed(args.seed+1)
-        with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/trace/trace_100.json') as f:
+        with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/trace/trace_100.json') as f:
             job_dict = json.load(f)
 
         self.job_runtime = {} # job information
@@ -97,7 +98,7 @@ class Experiment:
             self.ckpt_ovhd[j] = []
             self.ckpt_batch[j] = 0
     
-        with open(f'/home/{user}/GIT/mig_exp/mps/scheduler/simulator/job_models.json') as f:
+        with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator/job_models.json') as f:
             job_models = json.load(f)
         # map job model to speedup (predicted and actual)
         self.perf_actual, self.perf_pred = get_speedup(job_models, args.error_mean, args.error_std)
@@ -145,7 +146,8 @@ class Experiment:
         run_log = open('logs/experiment_full.log','w')
 
         ####### start job listener ##########
-        x = threading.Thread(target=thread_func, daemon=True, args=(self, run_log, 'full'))
+        stop_event = Event()
+        x = threading.Thread(target=thread_func, daemon=True, args=(stop_event, self, run_log, 'full'))
         x.start()
         time.sleep(10)
 
@@ -271,3 +273,7 @@ class Experiment:
             json.dump(self.overall_rate, f, indent=4)
 
         self.term_thread()
+        stop_event.set()
+#        print('trying to join threads')    
+#        x.join()
+        print('done')

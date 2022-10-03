@@ -39,7 +39,7 @@ import subprocess
 from datetime import datetime
 import grpc
 home = os.environ.get('HOME')
-sys.path.append(f'{home}/GIT/mig_exp/mps/grpc')
+sys.path.append(f'{home}/GIT/socc22-miso/mps/grpc')
 import grpc_pb2, grpc_pb2_grpc
 
 cwd = os.getcwd()

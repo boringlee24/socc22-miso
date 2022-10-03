@@ -10,16 +10,17 @@ import argparse
 import math
 from pathlib import Path
 import sys
-sys.path.append(f'/home/{user}/GIT/mig_exp/mps/scheduler/simulator/')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator/')
 from utils import *
 import copy
 from controller_helper import *
 import threading
 import _thread
 from exp_full import Experiment
-sys.path.append(f'/home/{user}/GIT/mig_exp/workloads')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/workloads')
 from send_signal import send_signal
 import socket
+from threading import Event
 
 class MPS(Experiment):
 
@@ -51,7 +52,8 @@ class MPS(Experiment):
         run_log = open('logs/experiment_mps.log','w')
 
         ####### start job listener ##########
-        x = threading.Thread(target=thread_func, daemon=True, args=(self, run_log, 'mps'))
+        stop_event = Event()
+        x = threading.Thread(target=thread_func, daemon=True, args=(stop_event, self, run_log, 'mps'))
         x.start()
 
         ####### initialize all GPUs #########
@@ -182,3 +184,7 @@ class MPS(Experiment):
             json.dump(self.overall_rate, f, indent=4)
 
         self.term_thread()
+        stop_event.set()
+#        print('trying to join threads')    
+#        x.join()
+        print('done')

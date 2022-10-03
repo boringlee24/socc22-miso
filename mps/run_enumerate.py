@@ -6,8 +6,8 @@ import time
 import os
 import grpc
 home = os.environ.get('HOME')
-os.chdir(f'{home}/GIT/mig_exp/mps/models')
-sys.path.append(f'{home}/GIT/mig_exp/mps/grpc')
+os.chdir(f'{home}/GIT/socc22-miso/mps/models')
+sys.path.append(f'{home}/GIT/socc22-miso/mps/grpc')
 import grpc_pb2, grpc_pb2_grpc
 from concurrent import futures
 
@@ -57,7 +57,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = gpuid
 g = mode.split('.')[0]
 gb = mode.split('.')[1]
 
-with open(f'{home}/GIT/mig_exp/mps/configs/{g}_{gb}.json') as f:
+with open(f'{home}/GIT/socc22-miso/mps/configs/{g}_{gb}.json') as f:
     batch_dict = json.load(f)
 
 for model,batches in batch_dict.items():
