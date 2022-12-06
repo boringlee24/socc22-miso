@@ -1,6 +1,7 @@
 # MISO: Exploiting Multi-Instance GPU Capability on Multi-Tenant GPU Clusters
 ## Published at 2022 ACM Symposium on Cloud Computing (SoCC '22)
 
+Presentation slides available at: [https://baolin-li.netlify.app/uploads/SoCC22_MISO.pdf](https://baolin-li.netlify.app/uploads/SoCC22_MISO.pdf)
 <!-- ## Experiment Setup -->
 This repository require access to NVIDIA A100 GPUs and sudo access to control the GPU.
 
