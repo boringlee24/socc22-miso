@@ -3,7 +3,7 @@ import mig_helper
 import os
 user = os.environ.get('USER')
 import sys
-sys.path.append(f'/home/{user}/GIT/sc22-miso/scheduler/main')
+sys.path.append(f'/home/{user}/GIT/socc22-miso/mps/scheduler/simulator')
 from utils import *
 import subprocess
 import io
@@ -11,7 +11,7 @@ import numpy as np
 import socket
 
 node = socket.gethostname()
-with open(f'/home/{user}/GIT/sc22-miso/scheduler/partition_code.json') as f:
+with open(f'/home/{user}/GIT/socc22-miso/mps/scheduler/partition_code.json') as f:
     partition_code = json.load(f)
     if os.path.exists('mig_device_autogen.json'):
         with open('mig_device_autogen.json') as f:
@@ -49,7 +49,7 @@ def read_cuda_device(gpuid, partition):
             return device_ids            
         if start:
             if 'UUID: ' not in line:
-                pdb.set_trace()
+                raise RuntimeError('UUID not found')
             mig_str = line.split('UUID: ')[1]
             mig_str = mig_str.strip(')\n')
             slice_str = line.split(' ')[3]

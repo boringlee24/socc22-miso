@@ -52,8 +52,7 @@ Record the MIG slice UUID as lookup tables.
 ```
 python export_cuda_device_auto.py
 ```
-
-Wait for it to finish, then do the same above for the next GPU node. At this point, all GPUs have been set up and ready to go.
+The default number of GPUs is 2 per node. Change this number in ``line63`` in the script according to actual number of GPUs. Wait for it to finish, then do the same above for the next GPU node. At this point, all GPUs have been set up and ready to go. A new file ``mig_device_autogen.json`` will be generated to record all the UUIDs of the GPUs. 
 
 On each GPU, run the following command:
 
